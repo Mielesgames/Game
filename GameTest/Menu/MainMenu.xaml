@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GameTest.Menu.MainMenu"
+             Title="MainMenu">
+    <Grid RowDefinitions="*, *, *, *, *, *, *, *">
+        <Image Grid.RowSpan="2"
+            Source="dotnet_bot.svg"/>
+        <Label Grid.Row="2"
+            x:Name="Title"
+            Text="Game title!"
+            Rotation="7"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            Scale="5"/>
+        <Label x:Name="WelcomeMessage"
+               Padding="20"
+               Grid.Row="3"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               FontSize="20"
+            Text="Welcome {username}!"/>
+        <HorizontalStackLayout Grid.Row="6" HorizontalOptions="Center" Spacing="10">
+            <Button x:Name="PlayButton" Text="Play!" HeightRequest="100" WidthRequest="250" CornerRadius="30" BackgroundColor="Green" FontSize="40" TextColor="White" Clicked="PlayButton_Clicked"/>
+            <Button HeightRequest="100" WidthRequest="100" BackgroundColor="Gray" CornerRadius="20" ImageSource="settingsicon.svg"/>
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>

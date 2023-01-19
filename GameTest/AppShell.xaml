@@ -4,11 +4,16 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:GameTest"
+    xmlns:Menu="clr-namespace:GameTest.Menu"
     Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
+        Title="MainMenu"
+        ContentTemplate="{DataTemplate Menu:MainMenu}"
         Route="MainPage" />
+    <ShellContent
+        Title="LevelPicker"
+        ContentTemplate="{DataTemplate Menu:LevelSelection}"
+        Route="LevelPicker" />
 
 </Shell>
