@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GameTest.Levels.LevelLoader"
              Title="LevelLoader">
-    <Grid RowDefinitions="*, *, *, *, *" ColumnDefinitions="*, *, *, *, *">
-        <Grid Grid.Row="3">
-            <Frame x:Name="thumbstickBackground" CornerRadius="90" HeightRequest="100" WidthRequest="100"/>
-            <Frame x:Name="thumbstick" CornerRadius="90" HeightRequest="80" WidthRequest="80" BackgroundColor="Gray"
+    <Grid RowDefinitions="*, *, *, *, *" ColumnDefinitions="*, *, *, *, *, *, *, *, *">
+        <Grid Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" VerticalOptions="Center" ZIndex="100">
+            <Frame x:Name="thumbstickBackground" CornerRadius="90" HeightRequest="100" WidthRequest="100" ZIndex="99"/>
+            <Frame x:Name="thumbstick" CornerRadius="90" HeightRequest="80" WidthRequest="80" BackgroundColor="Gray" ZIndex="100"
            TranslationX="0" TranslationY="0"
            InputTransparent="False">
                 <Frame.GestureRecognizers>
@@ -14,6 +14,6 @@
                 </Frame.GestureRecognizers>
             </Frame>
         </Grid>
-        <Image Source="dotnet_bot.svg" x:Name="Player"/>
+        <Image Source="dotnet_bot.svg" x:Name="Player" ZIndex="90"/>
     </Grid>
 </ContentPage>
