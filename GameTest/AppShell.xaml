@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:GameTest"
     xmlns:Menu="clr-namespace:GameTest.Menu"
+    xmlns:Levels="clr-namespace:GameTest.Levels"
     Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
@@ -15,5 +16,9 @@
         Title="LevelPicker"
         ContentTemplate="{DataTemplate Menu:LevelSelection}"
         Route="LevelPicker" />
+    <ShellContent
+        Title="LevelLoader"
+        ContentTemplate="{DataTemplate Levels:LevelLoader}"
+        Route="LevelLoader"/>
 
 </Shell>

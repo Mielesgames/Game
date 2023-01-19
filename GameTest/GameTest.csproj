@@ -57,10 +57,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Levels\" />
-	</ItemGroup>
-
-	<ItemGroup>
+	  <MauiXaml Update="Levels\LevelLoader.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Menu\LevelSelection.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

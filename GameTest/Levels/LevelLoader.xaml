@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GameTest.Levels.LevelLoader"
+             Title="LevelLoader">
+    <Grid RowDefinitions="*, *, *, *, *" ColumnDefinitions="*, *, *, *, *">
+        <Grid Grid.Row="3">
+            <Frame x:Name="thumbstickBackground" CornerRadius="90" HeightRequest="100" WidthRequest="100"/>
+            <Frame x:Name="thumbstick" CornerRadius="90" HeightRequest="80" WidthRequest="80" BackgroundColor="Gray"
+           TranslationX="0" TranslationY="0"
+           InputTransparent="False">
+                <Frame.GestureRecognizers>
+                    <PanGestureRecognizer PanUpdated="OnThumbstickPanUpdated"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+        </Grid>
+    </Grid>
+</ContentPage>
