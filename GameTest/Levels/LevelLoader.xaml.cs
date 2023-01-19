@@ -21,24 +21,28 @@ public partial class LevelLoader : ContentPage
             if (x > 12.75 && y > 12.75)
             {
                 Console.WriteLine("South-East");
+                Player.ScaleX = 1;
                 Player.TranslationX = Player.TranslationX + movementSpeed;
                 Player.TranslationY = Player.TranslationY + movementSpeed;
             }
             else if (x > 12.75 && y < -12.75)
             {
                 Console.WriteLine("North-East");
+                Player.ScaleX = 1;
                 Player.TranslationX = Player.TranslationX + movementSpeed;
                 Player.TranslationY = Player.TranslationY - movementSpeed;
             }
             else if (x < -12.75 && y > 12.75)
             {
                 Console.WriteLine("South-West");
+                Player.ScaleX = -1;
                 Player.TranslationX = Player.TranslationX - movementSpeed;
                 Player.TranslationY = Player.TranslationY + movementSpeed;
             }
             else if (x < -12.75 && y < -12.75)
             {
                 Console.WriteLine("North-West");
+                Player.ScaleX = -1;
                 Player.TranslationX = Player.TranslationX - movementSpeed;
                 Player.TranslationY = Player.TranslationY - movementSpeed;
             }
@@ -55,10 +59,12 @@ public partial class LevelLoader : ContentPage
             else if (x > 20 && y > -12.75 && y < 12.75)
             {
                 Console.WriteLine("East");
+                Player.ScaleX = 1;
                 Player.TranslationX = Player.TranslationX + movementSpeed;
             }
             else if (x < -20 && y > -12.75 && y < 12.75)
             {
+                Player.ScaleX = -1;
                 Console.WriteLine("West");
                 Player.TranslationX = Player.TranslationX - movementSpeed;
             }
