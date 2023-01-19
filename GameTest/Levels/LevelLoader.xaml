@@ -14,5 +14,6 @@
                 </Frame.GestureRecognizers>
             </Frame>
         </Grid>
+        <Image Source="dotnet_bot.svg" x:Name="Player"/>
     </Grid>
 </ContentPage>
