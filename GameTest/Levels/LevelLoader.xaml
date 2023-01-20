@@ -3,7 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GameTest.Levels.LevelLoader"
              Title="LevelLoader">
-    <Grid RowDefinitions="*, *, *, *, *" ColumnDefinitions="*, *, *, *, *, *, *, *, *">
+    <Grid RowDefinitions="*, *, *, *, *" ColumnDefinitions="*, *, *, *, *, *, *, *, *" BackgroundColor="Black">
+        <Frame x:Name="mapContents" Grid.ColumnSpan="11" Grid.RowSpan="10" BackgroundColor="Transparent" IsClippedToBounds="False">
+            <StackLayout x:Name="Bullets">
+                <!-- Bullets will get stored in here -->
+            </StackLayout>
+        </Frame>
+        <AbsoluteLayout Grid.ColumnSpan="10" Grid.RowSpan="10">
+            <Image Source="snas.png" Aspect="Center" x:Name="map" HorizontalOptions="End"/>
+        </AbsoluteLayout>
         <Grid Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" VerticalOptions="Center" ZIndex="100">
             <Frame x:Name="thumbstickBackground" CornerRadius="90" HeightRequest="100" WidthRequest="100" ZIndex="99"/>
             <Frame x:Name="thumbstick" CornerRadius="90" HeightRequest="80" WidthRequest="80" BackgroundColor="Gray" ZIndex="100"
@@ -14,6 +22,7 @@
                 </Frame.GestureRecognizers>
             </Frame>
         </Grid>
-        <Image Source="dotnet_bot.svg" x:Name="Player" ZIndex="90"/>
+        <Button Text="Shoot" CornerRadius="90" Grid.Row="2" Grid.Column="7" BackgroundColor="Red" HeightRequest="100" WidthRequest="100" VerticalOptions="Center" HorizontalOptions="Center" Grid.RowSpan="2" Opacity="0.2" Pressed="Shoot"/>
+        <Image Source="dotnet_bot.svg" x:Name="Player" ZIndex="90" Grid.Column="4" Grid.Row="2"/>
     </Grid>
 </ContentPage>

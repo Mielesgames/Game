@@ -8,6 +8,7 @@ public partial class LevelLoader : ContentPage
 	{
 		InitializeComponent();
 	}
+    private string playerFacingDirection = "East";
     private void OnThumbstickPanUpdated(object sender, PanUpdatedEventArgs e)
     {
         if (e.StatusType == GestureStatus.Running)
@@ -15,58 +16,57 @@ public partial class LevelLoader : ContentPage
             double x = e.TotalX, y = e.TotalY;
             thumbstick.TranslationX = x;
             thumbstick.TranslationY = y;
-
             var movementSpeed = 1;
             // detects which way its being pulled \\
             if (x > 12.75 && y > 12.75)
             {
-                Console.WriteLine("South-East");
+                playerFacingDirection = "South-East";
                 Player.ScaleX = 1;
-                Player.TranslationX = Player.TranslationX + movementSpeed;
-                Player.TranslationY = Player.TranslationY + movementSpeed;
+                map.TranslationX = map.TranslationX - movementSpeed;
+                map.TranslationY = map.TranslationY - movementSpeed;
             }
             else if (x > 12.75 && y < -12.75)
             {
-                Console.WriteLine("North-East");
+                playerFacingDirection = "North-East";
                 Player.ScaleX = 1;
-                Player.TranslationX = Player.TranslationX + movementSpeed;
-                Player.TranslationY = Player.TranslationY - movementSpeed;
+                map.TranslationX = map.TranslationX - movementSpeed;
+                map.TranslationY = map.TranslationY + movementSpeed;
             }
             else if (x < -12.75 && y > 12.75)
             {
-                Console.WriteLine("South-West");
+                playerFacingDirection = "South-West";
                 Player.ScaleX = -1;
-                Player.TranslationX = Player.TranslationX - movementSpeed;
-                Player.TranslationY = Player.TranslationY + movementSpeed;
+                map.TranslationX = map.TranslationX + movementSpeed;
+                map.TranslationY = map.TranslationY - movementSpeed;
             }
             else if (x < -12.75 && y < -12.75)
             {
-                Console.WriteLine("North-West");
+                playerFacingDirection = "North-West";
                 Player.ScaleX = -1;
-                Player.TranslationX = Player.TranslationX - movementSpeed;
-                Player.TranslationY = Player.TranslationY - movementSpeed;
+                map.TranslationX = map.TranslationX + movementSpeed;
+                map.TranslationY = map.TranslationY + movementSpeed;
             }
             else if (x > -12.75 && x < 12.75 && y > 20)
             {
-                Console.WriteLine("South");
-                Player.TranslationY = Player.TranslationY + movementSpeed;
+                playerFacingDirection = "South";
+                map.TranslationY = map.TranslationY - movementSpeed;
             }
             else if (x > -12.75 && x < 12.75 && y < -20)
             {
-                Console.WriteLine("North");
-                Player.TranslationY = Player.TranslationY - movementSpeed;
+                playerFacingDirection = "North";
+                map.TranslationY = map.TranslationY + movementSpeed;
             }
             else if (x > 20 && y > -12.75 && y < 12.75)
             {
-                Console.WriteLine("East");
+                playerFacingDirection = "East";
                 Player.ScaleX = 1;
-                Player.TranslationX = Player.TranslationX + movementSpeed;
+                map.TranslationX = map.TranslationX - movementSpeed;
             }
             else if (x < -20 && y > -12.75 && y < 12.75)
             {
                 Player.ScaleX = -1;
-                Console.WriteLine("West");
-                Player.TranslationX = Player.TranslationX - movementSpeed;
+                playerFacingDirection = "West";
+                map.TranslationX = map.TranslationX + movementSpeed;
             }
         }
         else if (e.StatusType == GestureStatus.Completed)
@@ -75,5 +75,28 @@ public partial class LevelLoader : ContentPage
             thumbstick.TranslationY = 0;
         }
     }
-
+    private void Bullet(string Direction)
+    {
+        Frame bullet = new Frame { BackgroundColor = Color.FromArgb("#00000") };
+        bullet.Parent = Player;
+        bullet.ZIndex = 200;
+        bullet.IsClippedToBounds = false;
+        bullet.IsVisible = true;
+        Bullets.Children.Add(bullet);
+        bullet.TranslationX = Player.TranslationX;
+        bullet.TranslationY = Player.TranslationY;
+        
+        for (int i = 0; i < 100; i++)
+        {
+            if (Direction == "North")
+            {
+                bullet.TranslationY += 1;
+            }
+        }
+        
+    }
+    private void Shoot(object sender, EventArgs e)
+    {
+        Bullet(playerFacingDirection);
+    }
 }

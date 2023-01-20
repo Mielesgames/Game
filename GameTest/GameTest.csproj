@@ -50,6 +50,7 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\settingsicon.svg" />
+	  <None Remove="Resources\Images\snas.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -66,6 +67,12 @@
 	  <MauiXaml Update="Menu\MainMenu.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Resources\Images\PlayerModel\Idle\" />
+	  <Folder Include="Resources\Images\PlayerModel\Died\" />
+	  <Folder Include="Resources\Images\PlayerModel\WalkCycle\" />
 	</ItemGroup>
 
 </Project>
