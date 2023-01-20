@@ -5,9 +5,7 @@
              Title="LevelLoader">
     <Grid RowDefinitions="*, *, *, *, *" ColumnDefinitions="*, *, *, *, *, *, *, *, *" BackgroundColor="Black">
         <Frame x:Name="mapContents" Grid.ColumnSpan="11" Grid.RowSpan="10" BackgroundColor="Transparent" IsClippedToBounds="False">
-            <StackLayout x:Name="Bullets">
-                <!-- Bullets will get stored in here -->
-            </StackLayout>
+
         </Frame>
         <AbsoluteLayout Grid.ColumnSpan="10" Grid.RowSpan="10">
             <Image Source="snas.png" Aspect="Center" x:Name="map" HorizontalOptions="End"/>
@@ -24,5 +22,8 @@
         </Grid>
         <Button Text="Shoot" CornerRadius="90" Grid.Row="2" Grid.Column="7" BackgroundColor="Red" HeightRequest="100" WidthRequest="100" VerticalOptions="Center" HorizontalOptions="Center" Grid.RowSpan="2" Opacity="0.2" Pressed="Shoot"/>
         <Image Source="dotnet_bot.svg" x:Name="Player" ZIndex="90" Grid.Column="4" Grid.Row="2"/>
+        <StackLayout x:Name="Bullets" Grid.Column="4" Grid.Row="2">
+            <!-- Bullets will get stored in here -->
+        </StackLayout>
     </Grid>
 </ContentPage>

@@ -75,10 +75,12 @@ public partial class LevelLoader : ContentPage
             thumbstick.TranslationY = 0;
         }
     }
-    private void Bullet(string Direction)
+    private async void Bullet(string Direction)
     {
-        Frame bullet = new Frame { BackgroundColor = Color.FromArgb("#00000") };
+        Frame bullet = new Frame { BackgroundColor = Colors.Red };
         bullet.Parent = Player;
+        bullet.HeightRequest = 10;
+        bullet.WidthRequest = 10;
         bullet.ZIndex = 200;
         bullet.IsClippedToBounds = false;
         bullet.IsVisible = true;
@@ -88,11 +90,25 @@ public partial class LevelLoader : ContentPage
         
         for (int i = 0; i < 100; i++)
         {
-            if (Direction == "North")
+            await Task.Delay(50);
+            if (Direction.Contains("North"))
             {
-                bullet.TranslationY += 1;
+                bullet.TranslationY -= 10;
+            }
+            if (Direction.Contains("South"))
+            {
+                bullet.TranslationY += 10;
+            }
+            if (Direction.Contains("East"))
+            {
+                bullet.TranslationX += 10;
+            }
+            if (Direction.Contains("West"))
+            {
+                bullet.TranslationX -= 10;
             }
         }
+        Bullets.Children.Remove(bullet);
         
     }
     private void Shoot(object sender, EventArgs e)
