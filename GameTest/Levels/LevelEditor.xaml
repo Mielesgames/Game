@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GameTest.Levels.LevelEditor"
+             Title="LevelEditor">
+    <VerticalStackLayout>
+        <Grid x:Name="Map">
+            <Frame/>
+            <Frame Grid.Row="1" BackgroundColor="Green"/>
+            <Frame Grid.Row="2" BackgroundColor="Red"/>
+            <Frame Grid.Row="3" BackgroundColor="Blue"/>
+            <Frame Grid.Row="2" BackgroundColor="Purple"/>
+        </Grid>
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Entry x:Name="WidthEntry" Placeholder="Map Width"/>
+            <Entry x:Name="HeightEntry" Placeholder="Map Height"/>
+            <Button Text="apply" Clicked="Button_Clicked" BackgroundColor="ForestGreen"/>
+        </HorizontalStackLayout>
+        <ScrollView>
+            <HorizontalStackLayout x:Name="Materials" HorizontalOptions="Center">
+                <Button x:Name="Grass" HeightRequest="50"/>
+                <Button x:Name="Stone"/>
+                <Button x:Name="Stone_Wall"/>
+                <Button x:Name="Water"/>
+                <Button x:Name="Spawn"/>
+                <Button x:Name="Void"/>
+            </HorizontalStackLayout>
+        </ScrollView>
+    </VerticalStackLayout>
+</ContentPage>

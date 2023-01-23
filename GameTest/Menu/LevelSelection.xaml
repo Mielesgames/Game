@@ -4,6 +4,13 @@
              x:Class="GameTest.Menu.LevelSelection"
              Title="LevelSelection">
     <VerticalStackLayout>
-        <Button Pressed="Button_Pressed"/>
+        <Frame>
+            <Button Pressed="Loader_Pressed" Text="Beta"/>
+        </Frame>
+        <Frame>
+            <HorizontalStackLayout>
+                <Button Pressed="Editor_Pressed" Text="LevelEditor"/>
+            </HorizontalStackLayout>
+        </Frame>
     </VerticalStackLayout>
 </ContentPage>

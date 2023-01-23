@@ -7,8 +7,12 @@ public partial class LevelSelection : ContentPage
 		InitializeComponent();
 	}
 
-    private async void Button_Pressed(object sender, EventArgs e)
+    private async void Loader_Pressed(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("///LevelLoader");
+    }
+    private async void Editor_Pressed(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///LevelEditor");
     }
 }

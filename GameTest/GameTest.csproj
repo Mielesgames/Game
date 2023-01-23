@@ -58,6 +58,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Levels\LevelEditor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Levels\LevelLoader.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
