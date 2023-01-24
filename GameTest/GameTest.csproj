@@ -49,6 +49,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\PlayerModel\WalkCycle\first.png" />
+	  <None Remove="Resources\Images\PlayerModel\WalkCycle\second.png" />
 	  <None Remove="Resources\Images\settingsicon.svg" />
 	  <None Remove="Resources\Images\snas.png" />
 	</ItemGroup>
@@ -75,7 +77,11 @@
 	<ItemGroup>
 	  <Folder Include="Resources\Images\PlayerModel\Idle\" />
 	  <Folder Include="Resources\Images\PlayerModel\Died\" />
-	  <Folder Include="Resources\Images\PlayerModel\WalkCycle\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Include="Resources\Images\PlayerModel\WalkCycle\second.png" />
+	  <MauiImage Include="Resources\Images\PlayerModel\WalkCycle\first.png" />
 	</ItemGroup>
 
 </Project>

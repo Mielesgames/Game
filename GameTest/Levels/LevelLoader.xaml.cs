@@ -8,6 +8,8 @@ public partial class LevelLoader : ContentPage
 	{
 		InitializeComponent();
 	}
+    private int walkingCycleTimer = 0;
+    private int stepSpeed = 5;
     private string playerFacingDirection = "East";
     private void OnThumbstickPanUpdated(object sender, PanUpdatedEventArgs e)
     {
@@ -17,6 +19,16 @@ public partial class LevelLoader : ContentPage
             thumbstick.TranslationX = x;
             thumbstick.TranslationY = y;
             var movementSpeed = 1;
+            walkingCycleTimer++;
+            if (walkingCycleTimer == stepSpeed)
+            {
+                Player.Source = "second.png";
+            }
+            else if (walkingCycleTimer == stepSpeed * 2)
+            {
+                Player.Source = "first.png";
+                walkingCycleTimer = 0;
+            }
             // detects which way its being pulled \\
             if (x > 12.75 && y > 12.75)
             {
@@ -71,6 +83,8 @@ public partial class LevelLoader : ContentPage
         }
         else if (e.StatusType == GestureStatus.Completed)
         {
+            walkingCycleTimer = 0;
+            Player.Source = "second.png";
             thumbstick.TranslationX = 0;
             thumbstick.TranslationY = 0;
         }
