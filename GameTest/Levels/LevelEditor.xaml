@@ -4,15 +4,13 @@
              x:Class="GameTest.Levels.LevelEditor"
              Title="LevelEditor">
     <VerticalStackLayout>
-        <Grid x:Name="Map">
-            <Frame/>
-            <Frame Grid.Row="1" BackgroundColor="Green"/>
-            <Frame Grid.Row="2" BackgroundColor="Red"/>
-            <Frame Grid.Row="3" BackgroundColor="Blue"/>
-            <Frame Grid.Row="2" BackgroundColor="Purple"/>
-        </Grid>
+        <ScrollView VerticalScrollBarVisibility="Always" HorizontalScrollBarVisibility="Always" IsClippedToBounds="False">
+            <Grid x:Name="Map"/>
+        </ScrollView>
         <HorizontalStackLayout HorizontalOptions="Center">
+            <Label Text="Width: "/>
             <Entry x:Name="WidthEntry" Placeholder="Map Width"/>
+            <Label Text="Height: "/>
             <Entry x:Name="HeightEntry" Placeholder="Map Height"/>
             <Button Text="apply" Clicked="Button_Clicked" BackgroundColor="ForestGreen"/>
         </HorizontalStackLayout>

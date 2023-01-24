@@ -10,6 +10,7 @@ public partial class LevelEditor : ContentPage
 	public int MapWidth = 0;
 	public int OldHeight = 0;
 	public int OldWidth = 0;
+    public string OccupiedSpots = "";
     private async void Button_Clicked(object sender, EventArgs e)
     {
 		try
@@ -27,39 +28,98 @@ public partial class LevelEditor : ContentPage
 			}
 			var HeightDifference = MapHeight - OldHeight;
 			var WidthDifference = MapWidth - OldWidth;
+            // adds row \\
 			if (HeightDifference > 0)
 			{
                 for (var i = 0; i < HeightDifference; i++)
                 {
                     Map.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+                    for (int column = 0; column != MapHeight; column++)
+                    {
+                        // Check if there is already a frame on the location \\
+                        var row = Map.RowDefinitions.Count - 1;
+                        if (!OccupiedSpots.Contains($"({row},{column})"))
+                        {
+                            // Places the Frame if there isn't already one \\
+                            Frame newFrame = new Frame { BackgroundColor = Colors.Red };
+                            newFrame.CornerRadius = 0;
+                            Map.Children.Add(newFrame);
+                            Grid.SetRow(newFrame, row);
+                            Grid.SetColumn(newFrame, column);
+                            OccupiedSpots += $"({row},{column})";
+                        }
+                    }
                 }
             }
-			else if (HeightDifference < 0)
-			{
+            // removes frame and grid row \\
+            else if (HeightDifference < 0)
+            {
+                var number = 0;
                 for (var i = 0; i > HeightDifference; i--)
                 {
                     Map.RowDefinitions.RemoveAt(Map.RowDefinitions.Count - 1);
-                    Map.RowDefinitions.RemoveAt(Map.RowDefinitions.Count - 1);
+                    var lastRow = Map.RowDefinitions.Count - 1;
+                    for (int c = 0; c != MapWidth; c++)
+                    {
+                        for (int j = Map.Children.Count - 1; j >= 0; j--)
+                        {
+                            var frame = (Frame)Map.Children[j];
+                            if (Grid.GetRow(frame) == lastRow)
+                            {
+                                frame.Parent = null;
+                                Map.Children.Remove(frame);
+                                OccupiedSpots = OccupiedSpots.Replace($"({lastRow - 1},{number})", "");
+                                number++;
+                            }
+                        }
+                    }
                 }
             }
-
+            // adds column and frame \\
             if (WidthDifference > 0)
             {
                 for (var i = 0; i < WidthDifference; i++)
                 {
-                    Map.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                    Map.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
+                    for (int c = 0; c != MapHeight; c++)
+                    {
+                        var column = Map.ColumnDefinitions.Count - 1;
+                        if (!OccupiedSpots.Contains($"({c},{column})"))
+                        {
+                            Frame newFrame = new Frame { BackgroundColor = Colors.Red };
+                            Map.Children.Add(newFrame);
+                            Grid.SetColumn(newFrame, column);
+                            Grid.SetRow(newFrame, c);
+                            OccupiedSpots += $"({c},{column})";
+                        }
+                    }
                 }
             }
+            // removes column and frame \\
             else if (WidthDifference < 0)
             {
                 for (var i = 0; i > WidthDifference; i--)
                 {
                     Map.ColumnDefinitions.RemoveAt(Map.ColumnDefinitions.Count - 1);
-					// Remove the last row and its contents from the Map
-					Map.Clear();
+                    var lastColumn = Map.ColumnDefinitions.Count - 1;
+                    var number = 0;
+                    for (int c = 0; c != MapHeight; c++)
+                    {
+                        for (int j = Map.Children.Count - 1; j >= 0; j--)
+                        {
+                            var frame = (Frame)Map.Children[j];
+                            if (Grid.GetColumn(frame) == lastColumn)
+                            {
+                                string position = $"({number},{lastColumn - 1})";
+                                frame.Parent = null;
+                                Map.Children.Remove(frame);
+                                OccupiedSpots = OccupiedSpots.Replace(position, "");
+                                number++;
+                            }
+                        }
+                    }
                 }
             }
-
         }
 		catch(Exception ex)
 		{
