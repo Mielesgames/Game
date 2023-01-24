@@ -8,7 +8,7 @@ public partial class LevelLoader : ContentPage
 	{
 		InitializeComponent();
 	}
-    private int walkingCycleTimer = 0;
+    private int walkCycleTimer = 0;
     private int stepSpeed = 5;
     private string playerFacingDirection = "East";
     private void OnThumbstickPanUpdated(object sender, PanUpdatedEventArgs e)
@@ -19,42 +19,58 @@ public partial class LevelLoader : ContentPage
             thumbstick.TranslationX = x;
             thumbstick.TranslationY = y;
             var movementSpeed = 1;
-            walkingCycleTimer++;
-            if (walkingCycleTimer == stepSpeed)
+            walkCycleTimer++;
+            if (walkCycleTimer == stepSpeed)
+            {
+                Player.Source = "first.png";
+            }
+            else if (walkCycleTimer == stepSpeed * 2)
             {
                 Player.Source = "second.png";
             }
-            else if (walkingCycleTimer == stepSpeed * 2)
+            else if (walkCycleTimer == stepSpeed * 3)
             {
-                Player.Source = "first.png";
-                walkingCycleTimer = 0;
+                Player.Source = "third.png";
+            }
+            else if (walkCycleTimer == stepSpeed * 4)
+            {
+                Player.Source = "fourth.png";
+            }
+            else if (walkCycleTimer == stepSpeed * 5)
+            {
+                Player.Source = "fifth.png";
+            }
+            else if (walkCycleTimer == stepSpeed * 6)
+            {
+                Player.Source = "last_frame.png";
+                walkCycleTimer = 0;
             }
             // detects which way its being pulled \\
             if (x > 12.75 && y > 12.75)
             {
                 playerFacingDirection = "South-East";
-                Player.ScaleX = 1;
+                Player.ScaleX = -1;
                 map.TranslationX = map.TranslationX - movementSpeed;
                 map.TranslationY = map.TranslationY - movementSpeed;
             }
             else if (x > 12.75 && y < -12.75)
             {
                 playerFacingDirection = "North-East";
-                Player.ScaleX = 1;
+                Player.ScaleX = -1;
                 map.TranslationX = map.TranslationX - movementSpeed;
                 map.TranslationY = map.TranslationY + movementSpeed;
             }
             else if (x < -12.75 && y > 12.75)
             {
                 playerFacingDirection = "South-West";
-                Player.ScaleX = -1;
+                Player.ScaleX = 1;
                 map.TranslationX = map.TranslationX + movementSpeed;
                 map.TranslationY = map.TranslationY - movementSpeed;
             }
             else if (x < -12.75 && y < -12.75)
             {
                 playerFacingDirection = "North-West";
-                Player.ScaleX = -1;
+                Player.ScaleX = 1;
                 map.TranslationX = map.TranslationX + movementSpeed;
                 map.TranslationY = map.TranslationY + movementSpeed;
             }
@@ -71,20 +87,20 @@ public partial class LevelLoader : ContentPage
             else if (x > 20 && y > -12.75 && y < 12.75)
             {
                 playerFacingDirection = "East";
-                Player.ScaleX = 1;
+                Player.ScaleX = -1;
                 map.TranslationX = map.TranslationX - movementSpeed;
             }
             else if (x < -20 && y > -12.75 && y < 12.75)
             {
-                Player.ScaleX = -1;
+                Player.ScaleX = 1;
                 playerFacingDirection = "West";
                 map.TranslationX = map.TranslationX + movementSpeed;
             }
         }
         else if (e.StatusType == GestureStatus.Completed)
         {
-            walkingCycleTimer = 0;
-            Player.Source = "second.png";
+            walkCycleTimer = 0;
+            Player.Source = "idle.png";
             thumbstick.TranslationX = 0;
             thumbstick.TranslationY = 0;
         }
@@ -123,10 +139,12 @@ public partial class LevelLoader : ContentPage
             }
         }
         Bullets.Children.Remove(bullet);
-        
     }
-    private void Shoot(object sender, EventArgs e)
+    private async void Shoot(object sender, EventArgs e)
     {
+        Player.Source = "shoot.png";
         Bullet(playerFacingDirection);
+        await Task.Delay(100);
+        Player.Source = "third.png";
     }
 }

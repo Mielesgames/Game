@@ -49,8 +49,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\PlayerModel\Idle\idle.png" />
+	  <None Remove="Resources\Images\PlayerModel\Shoot\shoot.png" />
+	  <None Remove="Resources\Images\PlayerModel\WalkCycle\fifth.png" />
 	  <None Remove="Resources\Images\PlayerModel\WalkCycle\first.png" />
+	  <None Remove="Resources\Images\PlayerModel\WalkCycle\fourth.png" />
+	  <None Remove="Resources\Images\PlayerModel\WalkCycle\last_frame.png" />
 	  <None Remove="Resources\Images\PlayerModel\WalkCycle\second.png" />
+	  <None Remove="Resources\Images\PlayerModel\WalkCycle\third.png" />
 	  <None Remove="Resources\Images\settingsicon.svg" />
 	  <None Remove="Resources\Images\snas.png" />
 	</ItemGroup>
@@ -75,13 +81,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Resources\Images\PlayerModel\Idle\" />
 	  <Folder Include="Resources\Images\PlayerModel\Died\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Include="Resources\Images\PlayerModel\WalkCycle\second.png" />
+	  <MauiImage Include="Resources\Images\PlayerModel\Idle\idle.png" />
+	  <MauiImage Include="Resources\Images\PlayerModel\Shoot\shoot.png" />
+	  <MauiImage Include="Resources\Images\PlayerModel\WalkCycle\fifth.png" />
+	  <MauiImage Include="Resources\Images\PlayerModel\WalkCycle\last_frame.png" />
 	  <MauiImage Include="Resources\Images\PlayerModel\WalkCycle\first.png" />
+	  <MauiImage Include="Resources\Images\PlayerModel\WalkCycle\fourth.png" />
+	  <MauiImage Include="Resources\Images\PlayerModel\WalkCycle\second.png" />
+	  <MauiImage Include="Resources\Images\PlayerModel\WalkCycle\third.png" />
 	</ItemGroup>
 
 </Project>
