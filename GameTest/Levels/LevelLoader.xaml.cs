@@ -40,13 +40,20 @@ public partial class LevelLoader : ContentPage
     private readonly int movementSpeed = 1; // the walkspeed \\
     private readonly int stepSpeed = 5; // the higher the number the slower the animation plays\\
     private string playerFacingDirection = "East";
+    private double initialX, initialY;
     private async void OnThumbstickPanUpdated(object sender, PanUpdatedEventArgs e)
     {
-        if (e.StatusType == GestureStatus.Running)
+        if (e.StatusType == GestureStatus.Started)
+        {
+            initialX = thumbstick.TranslationX;
+            initialY = thumbstick.TranslationY;
+        }
+        else if (e.StatusType == GestureStatus.Running)
         {
             double x = e.TotalX, y = e.TotalY;
-            thumbstick.TranslationX = x;
-            thumbstick.TranslationY = y;
+            await thumbstick.TranslateTo(x, y, 15, Easing.CubicOut);
+            //thumbstick.TranslationX = initialX + e.TotalX; ;
+            //thumbstick.TranslationY = initialY + e.TotalY;
             walkCycleTimer++;
             if (walkCycleTimer == stepSpeed)
             {
@@ -133,6 +140,7 @@ public partial class LevelLoader : ContentPage
         }
         else if (e.StatusType == GestureStatus.Completed)
         {
+            await Task.Delay(20);
             walkCycleTimer = 0;
             Player.Source = "idle.png";
             thumbstick.TranslationX = 0;

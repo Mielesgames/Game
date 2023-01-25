@@ -15,7 +15,7 @@
             <Frame x:Name="thumbstick" CornerRadius="90" HeightRequest="80" WidthRequest="80" BackgroundColor="Gray" ZIndex="100"
            TranslationX="0" TranslationY="0">
                 <Frame.GestureRecognizers>
-                    <PanGestureRecognizer PanUpdated="OnThumbstickPanUpdated" />
+                    <PanGestureRecognizer PanUpdated="OnThumbstickPanUpdated"/>
                 </Frame.GestureRecognizers>
             </Frame>
         </Grid>
