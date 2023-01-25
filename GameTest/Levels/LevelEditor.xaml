@@ -4,16 +4,11 @@
              x:Class="GameTest.Levels.LevelEditor"
              Title="LevelEditor">
     <VerticalStackLayout>
-        <ScrollView VerticalScrollBarVisibility="Always" HorizontalScrollBarVisibility="Always" IsClippedToBounds="False">
-            <Grid x:Name="Map"/>
+        <ScrollView VerticalScrollBarVisibility="Always" HorizontalScrollBarVisibility="Always" IsClippedToBounds="False" MaximumHeightRequest="150" MaximumWidthRequest="500">
+            <StackLayout>
+                <Grid x:Name="Map"/>
+            </StackLayout>
         </ScrollView>
-        <HorizontalStackLayout HorizontalOptions="Center">
-            <Label Text="Width: "/>
-            <Entry x:Name="WidthEntry" Placeholder="Map Width"/>
-            <Label Text="Height: "/>
-            <Entry x:Name="HeightEntry" Placeholder="Map Height"/>
-            <Button Text="apply" Clicked="Button_Clicked" BackgroundColor="ForestGreen"/>
-        </HorizontalStackLayout>
         <ScrollView>
             <HorizontalStackLayout x:Name="Materials" HorizontalOptions="Center">
                 <Button x:Name="Grass" HeightRequest="50"/>
@@ -24,5 +19,6 @@
                 <Button x:Name="Void"/>
             </HorizontalStackLayout>
         </ScrollView>
+        <Button Text="Return to menu" Clicked="Button_Clicked"/>
     </VerticalStackLayout>
 </ContentPage>
