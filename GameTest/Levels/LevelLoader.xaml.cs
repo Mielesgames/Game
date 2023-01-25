@@ -7,18 +7,27 @@ public partial class LevelLoader : ContentPage
 	public LevelLoader()
 	{
 		InitializeComponent();
+        if (ShootingEnabled)
+        {
+            ShootButton.IsVisible = true;
+        }
+        else
+        {
+            ShootButton.IsVisible = false;
+        }
 	}
+    private readonly bool ShootingEnabled = true;
     private int walkCycleTimer = 0;
-    private int stepSpeed = 5;
+    private readonly int movementSpeed = 1; // the walkspeed \\
+    private readonly int stepSpeed = 5; // the higher the number the slower the animation plays\\
     private string playerFacingDirection = "East";
-    private void OnThumbstickPanUpdated(object sender, PanUpdatedEventArgs e)
+    private async void OnThumbstickPanUpdated(object sender, PanUpdatedEventArgs e)
     {
         if (e.StatusType == GestureStatus.Running)
         {
             double x = e.TotalX, y = e.TotalY;
             thumbstick.TranslationX = x;
             thumbstick.TranslationY = y;
-            var movementSpeed = 1;
             walkCycleTimer++;
             if (walkCycleTimer == stepSpeed)
             {
@@ -46,6 +55,7 @@ public partial class LevelLoader : ContentPage
                 walkCycleTimer = 0;
             }
             // detects which way its being pulled \\
+            await Task.Delay(100);
             if (x > 12.75 && y > 12.75)
             {
                 playerFacingDirection = "South-East";
