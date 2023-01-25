@@ -50,7 +50,9 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\PlayerModel\Idle\idle.png" />
-	  <None Remove="Resources\Images\PlayerModel\Shoot\shoot.png" />
+	  <None Remove="Resources\Images\PlayerModel\Shoot\hold_gun.png" />
+	  <None Remove="Resources\Images\PlayerModel\Shoot\shoot_final.png" />
+	  <None Remove="Resources\Images\PlayerModel\Shoot\shoot_first.png" />
 	  <None Remove="Resources\Images\PlayerModel\WalkCycle\fifth.png" />
 	  <None Remove="Resources\Images\PlayerModel\WalkCycle\first.png" />
 	  <None Remove="Resources\Images\PlayerModel\WalkCycle\fourth.png" />
@@ -86,7 +88,9 @@
 
 	<ItemGroup>
 	  <MauiImage Include="Resources\Images\PlayerModel\Idle\idle.png" />
-	  <MauiImage Include="Resources\Images\PlayerModel\Shoot\shoot.png" />
+	  <MauiImage Include="Resources\Images\PlayerModel\Shoot\shoot_final.png" />
+	  <MauiImage Include="Resources\Images\PlayerModel\Shoot\hold_gun.png" />
+	  <MauiImage Include="Resources\Images\PlayerModel\Shoot\shoot_first.png" />
 	  <MauiImage Include="Resources\Images\PlayerModel\WalkCycle\fifth.png" />
 	  <MauiImage Include="Resources\Images\PlayerModel\WalkCycle\last_frame.png" />
 	  <MauiImage Include="Resources\Images\PlayerModel\WalkCycle\first.png" />

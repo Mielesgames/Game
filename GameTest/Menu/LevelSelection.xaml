@@ -5,7 +5,10 @@
              Title="LevelSelection">
     <VerticalStackLayout>
         <Frame>
-            <Button Pressed="Loader_Pressed" Text="Beta"/>
+            <StackLayout BackgroundColor="Transparent">
+                <Button x:Name="Intro" Pressed="Loader_Pressed" Text="Introduction"/>
+                <Button x:Name="level1" Pressed="Loader_Pressed" Text="Level 1-1"/>
+            </StackLayout>
         </Frame>
         <Frame>
             <HorizontalStackLayout>

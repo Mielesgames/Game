@@ -4,9 +4,22 @@ namespace GameTest.Levels;
 
 public partial class LevelLoader : ContentPage
 {
-	public LevelLoader()
+	public LevelLoader(bool cutscene = false, string mapImage = "snas.png", int levelID = 0)
 	{
 		InitializeComponent();
+        IsACutscene = cutscene;
+        map.Source = "snas.png";
+        if (IsACutscene)
+        {
+            Player.IsVisible = false;
+            thumbstick.IsVisible = false;
+            thumbstickBackground.IsVisible = false;
+            ShootingEnabled = false;
+            if (levelID == 0)
+            {
+                _ = Cutscene1();
+            }
+        }
         if (ShootingEnabled)
         {
             ShootButton.IsVisible = true;
@@ -16,7 +29,13 @@ public partial class LevelLoader : ContentPage
             ShootButton.IsVisible = false;
         }
 	}
-    private readonly bool ShootingEnabled = true;
+    private async Task Cutscene1()
+    {
+        await Typewrite("hello",1000);
+    }
+
+    private bool ShootingEnabled = true;
+    private bool IsACutscene = false;
     private int walkCycleTimer = 0;
     private readonly int movementSpeed = 1; // the walkspeed \\
     private readonly int stepSpeed = 5; // the higher the number the slower the animation plays\\
@@ -106,6 +125,11 @@ public partial class LevelLoader : ContentPage
                 playerFacingDirection = "West";
                 map.TranslationX = map.TranslationX + movementSpeed;
             }
+            else
+            {
+                Player.Source = "idle.png";
+                walkCycleTimer = 0;
+            }
         }
         else if (e.StatusType == GestureStatus.Completed)
         {
@@ -114,6 +138,17 @@ public partial class LevelLoader : ContentPage
             thumbstick.TranslationX = 0;
             thumbstick.TranslationY = 0;
         }
+    }
+    private Task Typewrite(string message, int delay = 60)
+    {
+        DialogueBox.Text = "";
+        DialogueBox.IsVisible = true;
+        for (int i = 0; i < message.Length; i++)
+        {
+            DialogueBox.Text = DialogueBox.Text + message[i].ToString();
+            Thread.Sleep(delay);
+        }
+        return null;
     }
     private async void Bullet(string Direction)
     {
@@ -152,9 +187,11 @@ public partial class LevelLoader : ContentPage
     }
     private async void Shoot(object sender, EventArgs e)
     {
-        Player.Source = "shoot.png";
+        Player.Source = "shoot_first.png";
         Bullet(playerFacingDirection);
-        await Task.Delay(100);
-        Player.Source = "third.png";
+        await Task.Delay(50);
+        Player.Source = "shoot_final.png";
+        await Task.Delay(50);
+        Player.Source = "hold_gun.png";
     }
 }
