@@ -5,7 +5,7 @@
              Title="LevelLoader">
     <Grid RowDefinitions="*, *, *, *, *" ColumnDefinitions="*, *, *, *, *, *, *, *, *" BackgroundColor="Black">
         <Frame x:Name="mapContents" Grid.ColumnSpan="11" Grid.RowSpan="10" BackgroundColor="Transparent" IsClippedToBounds="False">
-
+            <!-- How are we supposed to fill this emptyness -->
         </Frame>
         <AbsoluteLayout Grid.ColumnSpan="10" Grid.RowSpan="10">
             <Image Source="snas.png" Aspect="Center" x:Name="map" HorizontalOptions="End"/>

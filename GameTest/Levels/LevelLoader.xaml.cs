@@ -1,4 +1,5 @@
 using Microsoft.Maui.Controls;
+using System.Drawing;
 
 namespace GameTest.Levels;
 
@@ -17,7 +18,7 @@ public partial class LevelLoader : ContentPage
             ShootingEnabled = false;
             if (levelID == 0)
             {
-                _ = Cutscene1();
+                Task.Run(Cutscene1);
             }
         }
         if (ShootingEnabled)
@@ -31,7 +32,15 @@ public partial class LevelLoader : ContentPage
 	}
     private async Task Cutscene1()
     {
-        await Typewrite("hello",1000);
+        try
+        {
+            await Typewrite("test", 200);
+        }
+        catch(Exception ex)
+        {
+            await DisplayAlert("test", ex.Message, "Aaa ok");
+        }
+        
     }
 
     private bool ShootingEnabled = true;
@@ -147,16 +156,16 @@ public partial class LevelLoader : ContentPage
             thumbstick.TranslationY = 0;
         }
     }
-    private Task Typewrite(string message, int delay = 60)
+    private async Task Typewrite(string message = "...", int delay = 60)
     {
         DialogueBox.Text = "";
         DialogueBox.IsVisible = true;
         for (int i = 0; i < message.Length; i++)
         {
-            DialogueBox.Text = DialogueBox.Text + message[i].ToString();
-            Thread.Sleep(delay);
+            DialogueBox.Text += message[i].ToString();
+            await Task.Delay(delay);
         }
-        return null;
+        return;
     }
     private async void Bullet(string Direction)
     {
@@ -190,6 +199,7 @@ public partial class LevelLoader : ContentPage
             {
                 bullet.TranslationX -= 10;
             }
+
         }
         Bullets.Children.Remove(bullet);
     }
