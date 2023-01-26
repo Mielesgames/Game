@@ -61,7 +61,7 @@ public partial class LevelLoader : ContentPage
             await Task.Delay(1000);
             await Typewrite($"I am {MainCharacterName}...", 100);
             await Typewrite("People have known me as the bad guy for years...", 60);
-            await Typewrite("I felt like I was worth nothing...", 60);
+            await Typewrite("Everyone kept making jokes about me...", 60);
             await Typewrite("Today I decided to change my reputation by being the hero for once");
             await Typewrite("but...", 60, 1000, true);
             await Typewrite("I can't do that without your help!");
