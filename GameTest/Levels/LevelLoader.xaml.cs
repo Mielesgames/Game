@@ -39,7 +39,7 @@ public partial class LevelLoader : ContentPage
         try
         {
             await Task.Delay(2000);
-            _ = Typewrite("Hello", 200);
+            _ = Typewrite("Hello", 150);
             Player.ScaleY = 3;
             Player.ScaleX = -3;
             Player.IsVisible = true;
@@ -127,7 +127,6 @@ public partial class LevelLoader : ContentPage
         {
             await DisplayAlert("test", ex.Message, "Aaa ok");
         }
-
     }
 
     private async Task Level1()
