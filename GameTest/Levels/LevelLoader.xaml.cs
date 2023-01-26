@@ -1,13 +1,10 @@
-using Microsoft.Maui.Controls;
-using System.Drawing;
-
 namespace GameTest.Levels;
 
 public partial class LevelLoader : ContentPage
 {
-	public LevelLoader(bool cutscene = false, string mapImage = "snas.png", int levelID = 0)
-	{
-		InitializeComponent();
+    public LevelLoader(bool cutscene = false, string mapImage = "snas.png", int levelID = 0)
+    {
+        InitializeComponent();
         IsACutscene = cutscene;
         map.Source = "snas.png";
         if (IsACutscene)
@@ -18,7 +15,8 @@ public partial class LevelLoader : ContentPage
             ShootingEnabled = false;
             if (levelID == 0)
             {
-                Task.Run(Cutscene1);
+                map.IsVisible = false;
+                _ = Cutscene1();
             }
         }
         if (ShootingEnabled)
@@ -29,27 +27,113 @@ public partial class LevelLoader : ContentPage
         {
             ShootButton.IsVisible = false;
         }
-	}
+    }
     private async Task Cutscene1()
     {
         try
         {
-            await Typewrite("test", 200);
+            await Task.Delay(2000);
+            _ = Typewrite("Hello", 200);
+            Player.ScaleY = 3;
+            Player.ScaleX = -3;
+            Player.IsVisible = true;
+            Player.Opacity = 0.1;
+            await Player.FadeTo(1,700);
+            await Task.Delay(1000);
+            await Typewrite("I am Amogus...", 100);
+            await Typewrite("People have known me as the bad guy for years...", 60);
+            await Typewrite("I felt like I was worth nothing...", 60);
+            await Typewrite("Today I decided to change my reputation by being the hero for once");
+            await Typewrite("but...", 60, 1000, true);
+            await Typewrite("I can't do that without your help!");
+            await Typewrite("But first I have to know your name.");
+            await Typewrite("What is your name?");
+            var username = await DisplayPromptAsync("Username", "What is your username?");
+            if (username == null)
+            {
+                username = "Undefined Username";
+            }
+            await Typewrite($"{username} huh..?", waitTime:1000);
+            if (username == "Undefined Username")
+            {
+                await Typewrite("It's weird that you chose this name though...");
+                await Typewrite("why would you wanna call yourself \"Undefined Username\"???");
+                await Typewrite("Are you sure you want to use this username?");
+                var accepted = await DisplayAlert("Confirm", "Are you sure you want to use this username?", "No, change it", "Yes");
+                if (accepted)
+                {
+                    username = await DisplayPromptAsync("New username", "Choose your new username");
+                    if (username == null)
+                    {
+                        username = "random person";
+                    }
+                    await Typewrite($"{username}");
+                    await Typewrite("Good choice!");
+                }
+                else
+                {
+                    await Typewrite("Alright...");
+                }
+            }
+            else
+            {
+                await Typewrite("That's a nice name");
+            }
+            await Typewrite($"Nice to meet you {username}!");
+            await Typewrite("Lets start our journey!");
+            for (int i = 0; i < 100; i++)
+            {
+                stepSpeed = 2;
+                await Task.Delay(50);
+                Player.TranslationX += 7;
+                walkCycleTimer++;
+                if (walkCycleTimer == stepSpeed)
+                {
+                    Player.Source = "first.png";
+                }
+                else if (walkCycleTimer == stepSpeed * 2)
+                {
+                    Player.Source = "second.png";
+                }
+                else if (walkCycleTimer == stepSpeed * 3)
+                {
+                    Player.Source = "third.png";
+                }
+                else if (walkCycleTimer == stepSpeed * 4)
+                {
+                    Player.Source = "fourth.png";
+                }
+                else if (walkCycleTimer == stepSpeed * 5)
+                {
+                    Player.Source = "fifth.png";
+                }
+                else if (walkCycleTimer == stepSpeed * 6)
+                {
+                    Player.Source = "last_frame.png";
+                    walkCycleTimer = 0;
+                }
+            }
+            DialogueFrame.IsVisible = false;
+            await Task.Delay(1000);
+            await Navigation.PopAsync();
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             await DisplayAlert("test", ex.Message, "Aaa ok");
         }
-        
+
     }
 
     private bool ShootingEnabled = true;
     private bool IsACutscene = false;
     private int walkCycleTimer = 0;
     private readonly int movementSpeed = 1; // the walkspeed \\
-    private readonly int stepSpeed = 5; // the higher the number the slower the animation plays\\
+    private int stepSpeed = 5; // the higher the number the slower the animation plays\\
     private string playerFacingDirection = "East";
+#pragma warning disable IDE0052 // Remove unread private members
+    // they aren't unread so idk why there is a warning \\
     private double initialX, initialY;
+#pragma warning restore IDE0052 // Remove unread private members
     private async void OnThumbstickPanUpdated(object sender, PanUpdatedEventArgs e)
     {
         if (e.StatusType == GestureStatus.Started)
@@ -156,14 +240,18 @@ public partial class LevelLoader : ContentPage
             thumbstick.TranslationY = 0;
         }
     }
-    private async Task Typewrite(string message = "...", int delay = 60)
+    private async Task Typewrite(string message = "...", int delay = 60, int waitTime = 700, bool waitBeforeContinue = true)
     {
         DialogueBox.Text = "";
-        DialogueBox.IsVisible = true;
+        DialogueFrame.IsVisible = true;
         for (int i = 0; i < message.Length; i++)
         {
             DialogueBox.Text += message[i].ToString();
             await Task.Delay(delay);
+        }
+        if (waitBeforeContinue)
+        {
+            await Task.Delay(waitTime);
         }
         return;
     }
@@ -179,7 +267,7 @@ public partial class LevelLoader : ContentPage
         Bullets.Children.Add(bullet);
         bullet.TranslationX = Player.TranslationX;
         bullet.TranslationY = Player.TranslationY;
-        
+
         for (int i = 0; i < 100; i++)
         {
             await Task.Delay(50);

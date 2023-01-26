@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GameTest.Levels.LevelLoader"
              Title="LevelLoader">
-    <Grid RowDefinitions="*, *, *, *, *" ColumnDefinitions="*, *, *, *, *, *, *, *, *" BackgroundColor="Black">
+    <Grid IsClippedToBounds="False" RowDefinitions="*, *, *, *, *" ColumnDefinitions="*, *, *, *, *, *, *, *, *" BackgroundColor="Black">
         <Frame x:Name="mapContents" Grid.ColumnSpan="11" Grid.RowSpan="10" BackgroundColor="Transparent" IsClippedToBounds="False">
             <!-- How are we supposed to fill this emptyness -->
         </Frame>
@@ -20,8 +20,10 @@
             </Frame>
         </Grid>
         <Button x:Name="ShootButton" Text="Shoot" CornerRadius="90" Grid.Row="2" Grid.Column="7" BackgroundColor="Red" HeightRequest="100" WidthRequest="100" VerticalOptions="Center" HorizontalOptions="Center" Grid.RowSpan="2" Opacity="0.2" Pressed="Shoot"/>
-        <Image Source="dotnet_bot.svg" x:Name="Player" ZIndex="90" Grid.Column="4" Grid.Row="2"/>
-        <Label Text="..." x:Name="DialogueBox" IsVisible="false" FontSize="Subtitle" Grid.ColumnSpan="9" Grid.Row="6" Grid.RowSpan="2" BackgroundColor="White" TextColor="Black"/>
+        <Image Source="idle.png" x:Name="Player" ZIndex="90" Grid.Column="4" Grid.Row="2"/>
+        <Frame x:Name="DialogueFrame" IsVisible="False" BackgroundColor="White" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="5" Grid.RowSpan="3" BorderColor="Black">
+            <Label Text="..." HorizontalTextAlignment="Center" x:Name="DialogueBox" FontSize="Subtitle" BackgroundColor="Transparent" TextColor="Black"/>
+        </Frame>
         <StackLayout x:Name="Bullets" Grid.Column="4" Grid.Row="2" Spacing="-20" VerticalOptions="Center" ZIndex="91">
             <!-- Bullets will get stored in here -->
         </StackLayout>

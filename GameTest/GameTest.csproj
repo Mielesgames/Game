@@ -12,14 +12,14 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>GameTest</ApplicationTitle>
+		<ApplicationTitle>Sussy Baka Simulator</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.gametest</ApplicationId>
 		<ApplicationIdGuid>fbeaa1cc-3f7e-44a8-bebf-e4c17692d9f0</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>6.9</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>

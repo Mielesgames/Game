@@ -2,10 +2,10 @@ namespace GameTest.Menu;
 
 public partial class LevelSelection : ContentPage
 {
-	public LevelSelection()
-	{
-		InitializeComponent();
-	}
+    public LevelSelection()
+    {
+        InitializeComponent();
+    }
 
     private async void Loader_Pressed(object sender, EventArgs e)
     {
