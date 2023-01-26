@@ -13,7 +13,7 @@
                     <VerticalStackLayout x:Name="Easy" BackgroundColor="Green" Spacing="10" Padding="10">
                         <Label Text="Easy Difficulty" TextColor="Black" FontSize="20"/>
                         <Button x:Name="Intro" Pressed="Loader_Pressed" Text="Introduction"/>
-                        <Button x:Name="level1" Pressed="Loader_Pressed" Text="Level 1-1" IsEnabled="False" IsVisible="False"/>
+                        <Button x:Name="level1" Pressed="Loader_Pressed" Text="Tutorial" IsEnabled="False" IsVisible="False"/>
                     </VerticalStackLayout>
                     <!-- Medium Difficulty Levels-->
                     <!-- Levels 5-8 -->

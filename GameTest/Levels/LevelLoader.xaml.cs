@@ -44,7 +44,7 @@ public partial class LevelLoader : ContentPage
     private string MainCharacterName = "Amogus";
     private bool ShootingEnabled = true;
     private bool IsACutscene = false;
-    private int MovementMode = 0; // 0 is map moves, 1 is player moves \\
+    private int MovementMode = 0; // 0 is map moves, 1 is player moves 2 is disabled \\
 
     // Cutscenes \\
     private async Task Cutscene1()
@@ -62,9 +62,9 @@ public partial class LevelLoader : ContentPage
             await Typewrite($"I am {MainCharacterName}...", 100);
             await Typewrite("People have known me as the bad guy for years...", 60);
             await Typewrite("Everyone kept making jokes about me...", 60);
-            await Typewrite("Today I decided to change my reputation by being the hero for once");
+            await Typewrite("Today I decided to improve my reputation by being the hero for once");
             await Typewrite("but...", 60, 1000, true);
-            await Typewrite("I can't do that without your help!");
+            await Typewrite("I can't do that without your help.");
             await Typewrite("But first I have to know your name.");
             await Typewrite("What is your name?");
             var username = await DisplayPromptAsync("Username", "What is your username?");
@@ -147,13 +147,35 @@ public partial class LevelLoader : ContentPage
     // Levels \\
     private async Task Level1()
     {
+        MovementMode = 2;
+        ShootButton.IsVisible = false;
         map.Source = "dotnet_bot.svg";
         await Task.Delay(2000);
         await Typewrite("Welcome to the first level!");
-        await Typewrite("In this level there are a few level 1 enemies.");
-        await Typewrite("Good luck!");
+        await Typewrite("I will give you a short tutorial on how everything works");
+        await Typewrite("The movement is currently disabled");
+        await Typewrite("Let's switch to the first movement mode");
         DialogueFrame.IsVisible = false;
+        await Task.Delay(500);
+        MovementMode = 0;
+        await Typewrite("This is the default movement mode, you can walk around freely");
+        await Typewrite("This mode is the most common mode that's used in the game.");
+        MovementMode = 2;
+        await Typewrite("Let's switch to the next movement mode.");
+        DialogueFrame.IsVisible = false;
+        await Task.Delay(500);
         MovementMode = 1;
+        await Typewrite("This is the next movement mode, the camera is now stuck in place.");
+        await Typewrite("This movement mode is mostly used in smaller maps.", waitTime: 500);
+        DialogueFrame.IsVisible = false;
+        await Task.Delay(2000);
+        await Typewrite("There is also a shoot button which obviously shoots bullets");
+        await Typewrite("Give it a try!");
+        ShootButton.IsVisible = true;
+        await Task.Delay(200);
+        DialogueFrame.IsVisible = false;
+        await Task.Delay(5000);
+        await Typewrite("Well done, I think you are ready for the real challenge!");
         return;
     }
 
@@ -311,6 +333,10 @@ public partial class LevelLoader : ContentPage
                     Player.Source = "idle.png";
                     walkCycleTimer = 0;
                 }
+            }
+            else if (MovementMode == 2)
+            {
+                Console.Write("Movement is currently disabled");
             }
             else
             {
