@@ -4,10 +4,10 @@
              x:Class="GameTest.Menu.LevelSelection"
              Title="LevelSelection">
     <VerticalStackLayout>
-        <Frame>
-            <StackLayout BackgroundColor="Transparent">
+        <Frame BackgroundColor="Transparent">
+            <StackLayout>
                 <Button x:Name="Intro" Pressed="Loader_Pressed" Text="Introduction"/>
-                <Button x:Name="level1" Pressed="Loader_Pressed" Text="Level 1-1"/>
+                <Button x:Name="level1" Pressed="Loader_Pressed" Text="Level 1-1" IsEnabled="False" IsVisible="False"/>
             </StackLayout>
         </Frame>
         <Frame>

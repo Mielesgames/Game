@@ -6,6 +6,7 @@ public partial class MainMenu : ContentPage
     {
         InitializeComponent();
         TitleAnimation();
+        WelcomeMessage.Text = $"Welcome {Preferences.Get("Username", "player")}";
     }
     private async void TitleAnimation()
     {

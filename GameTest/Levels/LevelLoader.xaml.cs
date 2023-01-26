@@ -132,6 +132,8 @@ public partial class LevelLoader : ContentPage
                 }
             }
             DialogueFrame.IsVisible = false;
+            Preferences.Set("Username", username);
+            Preferences.Set("HasCompletedIntro", true);
             await Task.Delay(1000);
             await Navigation.PopAsync();
         }
