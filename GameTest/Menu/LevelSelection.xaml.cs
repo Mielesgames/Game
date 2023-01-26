@@ -5,6 +5,17 @@ public partial class LevelSelection : ContentPage
     public LevelSelection()
     {
         InitializeComponent();
+        // adds message for when there aren't any unlocked levels \\
+        if (Normal.Children.Count <= 1)
+        {
+            Label noLevelsUnlocked = new Label { Text = "No levels unlocked yet" };
+            Normal.Children.Add(noLevelsUnlocked);
+        }
+        if (Hard.Children.Count <= 1)
+        {
+            Label noLevelsUnlocked = new Label { Text = "No levels unlocked yet" };
+            Hard.Children.Add(noLevelsUnlocked);
+        }
         _ = CheckLevelCompletionState();
     }
     private bool HasCompletedIntro = Preferences.Get("HasCompletedIntro", false);
@@ -32,7 +43,7 @@ public partial class LevelSelection : ContentPage
             level1.IsEnabled = true;
         }
     }
-        private async void Loader_Pressed(object sender, EventArgs e)
+    private async void Loader_Pressed(object sender, EventArgs e)
     {
         if (sender == Intro)
         {
@@ -47,8 +58,5 @@ public partial class LevelSelection : ContentPage
             await Navigation.PushAsync(new Levels.LevelLoader());
         }
     }
-    private async void Editor_Pressed(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("///LevelEditor");
-    }
+
 }

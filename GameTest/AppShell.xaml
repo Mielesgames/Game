@@ -20,9 +20,5 @@
         Title="LevelLoader"
         ContentTemplate="{DataTemplate Levels:LevelLoader}"
         Route="LevelLoader"/>
-    <ShellContent
-        Title="LevelEditor"
-        ContentTemplate="{DataTemplate Levels:LevelEditor}"
-        Route="LevelEditor"/>
 
 </Shell>

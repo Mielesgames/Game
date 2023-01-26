@@ -4,15 +4,25 @@
              x:Class="GameTest.Menu.LevelSelection"
              Title="LevelSelection">
     <VerticalStackLayout>
-        <Frame BackgroundColor="Transparent">
-            <StackLayout>
-                <Button x:Name="Intro" Pressed="Loader_Pressed" Text="Introduction"/>
-                <Button x:Name="level1" Pressed="Loader_Pressed" Text="Level 1-1" IsEnabled="False" IsVisible="False"/>
-            </StackLayout>
-        </Frame>
-        <Frame>
-            <HorizontalStackLayout>
-                <Button Pressed="Editor_Pressed" Text="LevelEditor"/>
+        <Frame BackgroundColor="White" HorizontalOptions="Center">
+            <HorizontalStackLayout Padding="20" Spacing="10">
+                <!-- Easy Difficulty Levels -->
+                <!-- Levels 1-4 -->
+                <VerticalStackLayout x:Name="Easy" BackgroundColor="Green" Spacing="10" Padding="10">
+                    <Label Text="Easy Difficulty" TextColor="Black" FontSize="20"/>
+                    <Button x:Name="Intro" Pressed="Loader_Pressed" Text="Introduction"/>
+                    <Button x:Name="level1" Pressed="Loader_Pressed" Text="Level 1-1" IsEnabled="False" IsVisible="False"/>
+                </VerticalStackLayout>
+                <!-- Medium Difficulty Levels-->
+                <!-- Levels 5-8 -->
+                <VerticalStackLayout x:Name="Normal" BackgroundColor="Orange" Spacing="10" Padding="10">
+                    <Label Text="Normal Difficulty" TextColor="Black" FontSize="20"/>
+                </VerticalStackLayout>
+                <!-- Hard Difficulty Levels-->
+                <!-- Levels 10-12 -->
+                <VerticalStackLayout x:Name="Hard" BackgroundColor="Red" Spacing="10" Padding="10">
+                    <Label Text="Hard Difficulty" TextColor="Black" FontSize="20"/>
+                </VerticalStackLayout>
             </HorizontalStackLayout>
         </Frame>
     </VerticalStackLayout>
