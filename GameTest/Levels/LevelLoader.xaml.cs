@@ -34,6 +34,18 @@ public partial class LevelLoader : ContentPage
             ShootButton.IsVisible = false;
         }
     }
+    // Variables \\
+            // walking \\
+    private int walkCycleTimer = 0;                         // timer
+    private readonly int movementSpeed = 1;            // walkspeed
+    private int stepSpeed = 5;                              // walkcycle delay
+    private string playerFacingDirection = "West";     // facing
+            // other\\
+    private string MainCharacterName = "Amogus";
+    private bool ShootingEnabled = true;
+    private bool IsACutscene = false;
+
+    // Cutscenes \\
     private async Task Cutscene1()
     {
         try
@@ -129,6 +141,7 @@ public partial class LevelLoader : ContentPage
         }
     }
 
+    // Levels \\
     private async Task Level1()
     {
         map.Source = "snas.png";
@@ -140,30 +153,17 @@ public partial class LevelLoader : ContentPage
         return;
     }
 
-    private string MainCharacterName = "Amogus";
-    private bool ShootingEnabled = true;
-    private bool IsACutscene = false;
-    private int walkCycleTimer = 0;
-    private readonly int movementSpeed = 1; // the walkspeed \\
-    private int stepSpeed = 5; // the higher the number the slower the animation plays\\
-    private string playerFacingDirection = "West";
-#pragma warning disable IDE0052 // Remove unread private members
-    // they aren't unread so idk why there is a warning \\
-    private double initialX, initialY;
-#pragma warning restore IDE0052 // Remove unread private members
+    // Controls \\
     private async void OnThumbstickPanUpdated(object sender, PanUpdatedEventArgs e)
     {
         if (e.StatusType == GestureStatus.Started)
         {
-            initialX = thumbstick.TranslationX;
-            initialY = thumbstick.TranslationY;
+            Console.WriteLine("Started Walking");
         }
         else if (e.StatusType == GestureStatus.Running)
         {
             double x = e.TotalX, y = e.TotalY;
             await thumbstick.TranslateTo(x, y, 15, Easing.CubicOut);
-            //thumbstick.TranslationX = initialX + e.TotalX; ;
-            //thumbstick.TranslationY = initialY + e.TotalY;
             walkCycleTimer++;
             if (walkCycleTimer == stepSpeed)
             {
@@ -257,21 +257,6 @@ public partial class LevelLoader : ContentPage
             thumbstick.TranslationY = 0;
         }
     }
-    private async Task Typewrite(string message = "...", int delay = 60, int waitTime = 700, bool waitBeforeContinue = true)
-    {
-        DialogueBox.Text = "";
-        DialogueFrame.IsVisible = true;
-        for (int i = 0; i < message.Length; i++)
-        {
-            DialogueBox.Text += message[i].ToString();
-            await Task.Delay(delay);
-        }
-        if (waitBeforeContinue)
-        {
-            await Task.Delay(waitTime);
-        }
-        return;
-    }
     private async void Bullet(string Direction)
     {
         Frame bullet = new Frame { BackgroundColor = Colors.Red };
@@ -316,5 +301,22 @@ public partial class LevelLoader : ContentPage
         Player.Source = "shoot_final.png";
         await Task.Delay(50);
         Player.Source = "hold_gun.png";
+    }
+
+    // Extra Features \\
+    private async Task Typewrite(string message = "...", int delay = 60, int waitTime = 700, bool waitBeforeContinue = true)
+    {
+        DialogueBox.Text = "";
+        DialogueFrame.IsVisible = true;
+        for (int i = 0; i < message.Length; i++)
+        {
+            DialogueBox.Text += message[i].ToString();
+            await Task.Delay(delay);
+        }
+        if (waitBeforeContinue)
+        {
+            await Task.Delay(waitTime);
+        }
+        return;
     }
 }
