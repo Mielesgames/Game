@@ -44,6 +44,7 @@ public partial class LevelLoader : ContentPage
     private string MainCharacterName = "Amogus";
     private bool ShootingEnabled = true;
     private bool IsACutscene = false;
+    private int MovementMode = 0; // 0 is map moves, 1 is player moves \\
 
     // Cutscenes \\
     private async Task Cutscene1()
@@ -146,12 +147,13 @@ public partial class LevelLoader : ContentPage
     // Levels \\
     private async Task Level1()
     {
-        map.Source = "snas.png";
+        map.Source = "dotnet_bot.svg";
         await Task.Delay(2000);
         await Typewrite("Welcome to the first level!");
         await Typewrite("In this level there are a few level 1 enemies.");
         await Typewrite("Good luck!");
         DialogueFrame.IsVisible = false;
+        MovementMode = 1;
         return;
     }
 
@@ -194,61 +196,127 @@ public partial class LevelLoader : ContentPage
             }
             // detects which way its being pulled \\
             await Task.Delay(100);
-            if (x > 12.75 && y > 12.75)
+            if (MovementMode == 0)
             {
-                playerFacingDirection = "South-East";
-                Player.ScaleX = -1;
-                map.TranslationX = map.TranslationX - movementSpeed;
-                map.TranslationY = map.TranslationY - movementSpeed;
+                if (x > 12.75 && y > 12.75)
+                {
+                    playerFacingDirection = "South-East";
+                    Player.ScaleX = -1;
+                    map.TranslationX = map.TranslationX - movementSpeed;
+                    map.TranslationY = map.TranslationY - movementSpeed;
+                }
+                else if (x > 12.75 && y < -12.75)
+                {
+                    playerFacingDirection = "North-East";
+                    Player.ScaleX = -1;
+                    map.TranslationX = map.TranslationX - movementSpeed;
+                    map.TranslationY = map.TranslationY + movementSpeed;
+                }
+                else if (x < -12.75 && y > 12.75)
+                {
+                    playerFacingDirection = "South-West";
+                    Player.ScaleX = 1;
+                    map.TranslationX = map.TranslationX + movementSpeed;
+                    map.TranslationY = map.TranslationY - movementSpeed;
+                }
+                else if (x < -12.75 && y < -12.75)
+                {
+                    playerFacingDirection = "North-West";
+                    Player.ScaleX = 1;
+                    map.TranslationX = map.TranslationX + movementSpeed;
+                    map.TranslationY = map.TranslationY + movementSpeed;
+                }
+                else if (x > -12.75 && x < 12.75 && y > 20)
+                {
+                    playerFacingDirection = "South";
+                    map.TranslationY = map.TranslationY - movementSpeed;
+                }
+                else if (x > -12.75 && x < 12.75 && y < -20)
+                {
+                    playerFacingDirection = "North";
+                    map.TranslationY = map.TranslationY + movementSpeed;
+                }
+                else if (x > 20 && y > -12.75 && y < 12.75)
+                {
+                    playerFacingDirection = "East";
+                    Player.ScaleX = -1;
+                    map.TranslationX = map.TranslationX - movementSpeed;
+                }
+                else if (x < -20 && y > -12.75 && y < 12.75)
+                {
+                    Player.ScaleX = 1;
+                    playerFacingDirection = "West";
+                    map.TranslationX = map.TranslationX + movementSpeed;
+                }
+                else
+                {
+                    Player.Source = "idle.png";
+                    walkCycleTimer = 0;
+                }
             }
-            else if (x > 12.75 && y < -12.75)
+            else if (MovementMode == 1)
             {
-                playerFacingDirection = "North-East";
-                Player.ScaleX = -1;
-                map.TranslationX = map.TranslationX - movementSpeed;
-                map.TranslationY = map.TranslationY + movementSpeed;
-            }
-            else if (x < -12.75 && y > 12.75)
-            {
-                playerFacingDirection = "South-West";
-                Player.ScaleX = 1;
-                map.TranslationX = map.TranslationX + movementSpeed;
-                map.TranslationY = map.TranslationY - movementSpeed;
-            }
-            else if (x < -12.75 && y < -12.75)
-            {
-                playerFacingDirection = "North-West";
-                Player.ScaleX = 1;
-                map.TranslationX = map.TranslationX + movementSpeed;
-                map.TranslationY = map.TranslationY + movementSpeed;
-            }
-            else if (x > -12.75 && x < 12.75 && y > 20)
-            {
-                playerFacingDirection = "South";
-                map.TranslationY = map.TranslationY - movementSpeed;
-            }
-            else if (x > -12.75 && x < 12.75 && y < -20)
-            {
-                playerFacingDirection = "North";
-                map.TranslationY = map.TranslationY + movementSpeed;
-            }
-            else if (x > 20 && y > -12.75 && y < 12.75)
-            {
-                playerFacingDirection = "East";
-                Player.ScaleX = -1;
-                map.TranslationX = map.TranslationX - movementSpeed;
-            }
-            else if (x < -20 && y > -12.75 && y < 12.75)
-            {
-                Player.ScaleX = 1;
-                playerFacingDirection = "West";
-                map.TranslationX = map.TranslationX + movementSpeed;
+                if (x > 12.75 && y > 12.75)
+                {
+                    playerFacingDirection = "South-East";
+                    Player.ScaleX = -1;
+                    Player.TranslationX += movementSpeed;
+                    Player.TranslationY += movementSpeed;
+                }
+                else if (x > 12.75 && y < -12.75)
+                {
+                    playerFacingDirection = "North-East";
+                    Player.ScaleX = -1;
+                    Player.TranslationX += movementSpeed;
+                    Player.TranslationY -= movementSpeed;
+                }
+                else if (x < -12.75 && y > 12.75)
+                {
+                    playerFacingDirection = "South-West";
+                    Player.ScaleX = 1;
+                    Player.TranslationX -= movementSpeed;
+                    Player.TranslationY += movementSpeed;
+                }
+                else if (x < -12.75 && y < -12.75)
+                {
+                    playerFacingDirection = "North-West";
+                    Player.ScaleX = 1;
+                    Player.TranslationX -= movementSpeed;
+                    Player.TranslationY -= movementSpeed;
+                }
+                else if (x > -12.75 && x < 12.75 && y > 20)
+                {
+                    playerFacingDirection = "South";
+                    Player.TranslationY += movementSpeed;
+                }
+                else if (x > -12.75 && x < 12.75 && y < -20)
+                {
+                    playerFacingDirection = "North";
+                    Player.TranslationY -= movementSpeed;
+                }
+                else if (x > 20 && y > -12.75 && y < 12.75)
+                {
+                    playerFacingDirection = "East";
+                    Player.ScaleX = -1;
+                    Player.TranslationX += movementSpeed;
+                }
+                else if (x < -20 && y > -12.75 && y < 12.75)
+                {
+                    Player.ScaleX = 1;
+                    playerFacingDirection = "West";
+                    Player.TranslationX -= movementSpeed;
+                }
+                else
+                {
+                    Player.Source = "idle.png";
+                    walkCycleTimer = 0;
+                }
             }
             else
             {
-                Player.Source = "idle.png";
-                walkCycleTimer = 0;
+                await DisplayAlert("Error", "Non-Existing Movement mode selected", "ok");
             }
+            
         }
         else if (e.StatusType == GestureStatus.Completed)
         {
@@ -259,7 +327,7 @@ public partial class LevelLoader : ContentPage
             thumbstick.TranslationY = 0;
         }
     }
-    private async void Bullet(string Direction)
+    private async Task Bullet(string Direction)
     {
         Frame bullet = new Frame { BackgroundColor = Colors.Red };
         bullet.Parent = Player;
@@ -298,7 +366,7 @@ public partial class LevelLoader : ContentPage
     private async void Shoot(object sender, EventArgs e)
     {
         Player.Source = "shoot_first.png";
-        Bullet(playerFacingDirection);
+        _ = Bullet(playerFacingDirection);
         await Task.Delay(50);
         Player.Source = "shoot_final.png";
         await Task.Delay(50);
