@@ -13,6 +13,10 @@ public partial class LevelSelection : ContentPage
         {
             await Navigation.PushAsync(new Levels.LevelLoader(cutscene: true));
         }
+        else if (sender == level1)
+        {
+            await Navigation.PushAsync(new Levels.LevelLoader(levelID: 0));
+        }
         else
         {
             await Navigation.PushAsync(new Levels.LevelLoader());

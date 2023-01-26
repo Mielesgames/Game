@@ -6,7 +6,6 @@ public partial class LevelLoader : ContentPage
     {
         InitializeComponent();
         IsACutscene = cutscene;
-        map.Source = "snas.png";
         if (IsACutscene)
         {
             Player.IsVisible = false;
@@ -17,6 +16,13 @@ public partial class LevelLoader : ContentPage
             {
                 map.IsVisible = false;
                 _ = Cutscene1();
+            }
+        }
+        else
+        {
+            if (levelID == 0)
+            {
+                _ = Level1();
             }
         }
         if (ShootingEnabled)
@@ -40,7 +46,7 @@ public partial class LevelLoader : ContentPage
             Player.Opacity = 0.1;
             await Player.FadeTo(1,700);
             await Task.Delay(1000);
-            await Typewrite("I am Amogus...", 100);
+            await Typewrite($"I am {MainCharacterName}...", 100);
             await Typewrite("People have known me as the bad guy for years...", 60);
             await Typewrite("I felt like I was worth nothing...", 60);
             await Typewrite("Today I decided to change my reputation by being the hero for once");
@@ -124,12 +130,24 @@ public partial class LevelLoader : ContentPage
 
     }
 
+    private async Task Level1()
+    {
+        map.Source = "snas.png";
+        await Task.Delay(2000);
+        await Typewrite("Welcome to the first level!");
+        await Typewrite("In this level there are a few level 1 enemies.");
+        await Typewrite("Good luck!");
+        DialogueFrame.IsVisible = false;
+        return;
+    }
+
+    private string MainCharacterName = "Amogus";
     private bool ShootingEnabled = true;
     private bool IsACutscene = false;
     private int walkCycleTimer = 0;
     private readonly int movementSpeed = 1; // the walkspeed \\
     private int stepSpeed = 5; // the higher the number the slower the animation plays\\
-    private string playerFacingDirection = "East";
+    private string playerFacingDirection = "West";
 #pragma warning disable IDE0052 // Remove unread private members
     // they aren't unread so idk why there is a warning \\
     private double initialX, initialY;
