@@ -72,7 +72,26 @@ public partial class LevelLoader : ContentPage
             {
                 username = "Undefined Username";
             }
-            await Typewrite($"{username} huh..?", waitTime:1000);
+            else if (username.ToLower() =="sus" || username.ToLower().Contains("sussy"))
+            {
+                await Typewrite($"{username}...?", 200, 1000);
+                Player.Source = "hold_gun.png";
+                await Typewrite("Change it...|||| NOW!");
+                await Typewrite("username = await DisplayPromptAsync(\"CHANGE\", \"IT\");");
+                username = await DisplayPromptAsync("CHANGE", "IT");
+                if (username.ToLower().Contains("sus") || username.ToLower() == "no")
+                {
+                    await Typewrite("you...",200, waitTime:100);
+                    await Typewrite("YOU...", 200);
+                    Player.Source = "shoot_first.png";
+                    await Task.Delay(10);
+                    Player.Source = "shoot_final.png";
+                    await Navigation.PopAsync();
+                }
+                Player.Source = "idle.png";
+                await Typewrite("That's better...");
+            }
+            await Typewrite($"{username}|| huh..?", waitTime:1000);
             if (username == "Undefined Username")
             {
                 await Typewrite("It's weird that you chose this name though...");
@@ -406,7 +425,15 @@ public partial class LevelLoader : ContentPage
         DialogueFrame.IsVisible = true;
         for (int i = 0; i < message.Length; i++)
         {
-            DialogueBox.Text += message[i].ToString();
+            if (message[i].ToString() == "|")
+            {
+                // the | can be used to add delay to a typewrite string \\
+                await Task.Delay(delay);
+            }
+            else
+            {
+                DialogueBox.Text += message[i].ToString();
+            }
             await Task.Delay(delay);
         }
         if (waitBeforeContinue)
