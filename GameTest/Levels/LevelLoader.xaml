@@ -4,7 +4,7 @@
              x:Class="GameTest.Levels.LevelLoader"
              Title="LevelLoader">
     <Grid IsClippedToBounds="False" RowDefinitions="*, *, *, *, *" ColumnDefinitions="*, *, *, *, *, *, *, *, *" BackgroundColor="Black">
-        <Frame x:Name="Game_Over" Grid.ColumnSpan="10" Grid.RowSpan="10" IsVisible="False" IsEnabled="False">
+        <Frame BackgroundColor="Black" x:Name="Game_Over" Grid.ColumnSpan="10" Grid.RowSpan="10" IsVisible="False" IsEnabled="False" ZIndex="199">
             <Label x:Name="Game_Over_text" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
         </Frame>
         <Frame x:Name="mapContents" Grid.ColumnSpan="11" Grid.RowSpan="10" BackgroundColor="Transparent" IsClippedToBounds="False">
