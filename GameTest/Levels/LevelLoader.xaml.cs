@@ -72,7 +72,7 @@ public partial class LevelLoader : ContentPage
             {
                 username = "Undefined Username";
             }
-            else if (username.ToLower() =="sus" || username.ToLower().Contains("sussy"))
+            else if (username.ToLower() == ("sus") || username.ToLower().Contains("sussy"))
             {
                 await Typewrite($"{username}...?", 200, 1000);
                 Player.Source = "hold_gun.png";
@@ -422,9 +422,14 @@ public partial class LevelLoader : ContentPage
 
     private async Task GameOver(string message = "")
     {
+        DialogueFrame.IsVisible = false;
         Game_Over.IsEnabled = true;
         Game_Over.IsVisible = true;
+        DialogueFrame.BackgroundColor = Colors.Black;
+        DialogueBox.TextColor = Colors.White;
+        DialogueBox.BackgroundColor = Colors.Black;
         await Typewrite("GAME OVER", chosenLabel: Game_Over_text);
+        await Task.Delay(1000);
         if (message != "")
         {
             await Typewrite($"{message}");

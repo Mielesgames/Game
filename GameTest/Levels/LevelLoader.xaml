@@ -5,7 +5,7 @@
              Title="LevelLoader">
     <Grid IsClippedToBounds="False" RowDefinitions="*, *, *, *, *" ColumnDefinitions="*, *, *, *, *, *, *, *, *" BackgroundColor="Black">
         <Frame BackgroundColor="Black" x:Name="Game_Over" Grid.ColumnSpan="10" Grid.RowSpan="10" IsVisible="False" IsEnabled="False" ZIndex="199">
-            <Label x:Name="Game_Over_text" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <Label x:Name="Game_Over_text" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30"/>
         </Frame>
         <Frame x:Name="mapContents" Grid.ColumnSpan="11" Grid.RowSpan="10" BackgroundColor="Transparent" IsClippedToBounds="False">
             <!-- How are we supposed to fill this emptyness -->
