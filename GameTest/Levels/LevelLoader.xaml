@@ -4,6 +4,9 @@
              x:Class="GameTest.Levels.LevelLoader"
              Title="LevelLoader">
     <Grid IsClippedToBounds="False" RowDefinitions="*, *, *, *, *" ColumnDefinitions="*, *, *, *, *, *, *, *, *" BackgroundColor="Black">
+        <Frame x:Name="Game_Over" Grid.ColumnSpan="10" Grid.RowSpan="10" IsVisible="False" IsEnabled="False">
+            <Label x:Name="Game_Over_text" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+        </Frame>
         <Frame x:Name="mapContents" Grid.ColumnSpan="11" Grid.RowSpan="10" BackgroundColor="Transparent" IsClippedToBounds="False">
             <!-- How are we supposed to fill this emptyness -->
         </Frame>

@@ -86,7 +86,7 @@ public partial class LevelLoader : ContentPage
                     Player.Source = "shoot_first.png";
                     await Task.Delay(10);
                     Player.Source = "shoot_final.png";
-                    await Navigation.PopAsync();
+                    await GameOver("You should have listened");
                 }
                 Player.Source = "idle.png";
                 await Typewrite("That's better...");
@@ -419,9 +419,27 @@ public partial class LevelLoader : ContentPage
     }
 
     // Extra Features \\
-    private async Task Typewrite(string message = "...", int delay = 60, int waitTime = 700, bool waitBeforeContinue = true)
+
+    private async Task GameOver(string message = "")
     {
-        DialogueBox.Text = "";
+        Game_Over.IsEnabled = true;
+        Game_Over.IsVisible = true;
+        await Typewrite("GAME OVER", chosenLabel: Game_Over_text);
+        if (message != "")
+        {
+            await Typewrite($"{message}");
+        }
+        await Task.Delay(2000);
+        await Navigation.PopAsync();
+    }
+    private async Task Typewrite(string message = "...", int delay = 60, int waitTime = 700, bool waitBeforeContinue = true, Label chosenLabel = null)
+    {
+        if (chosenLabel == null)
+        {
+            chosenLabel = DialogueBox;
+        }
+
+        chosenLabel.Text = "";
         DialogueFrame.IsVisible = true;
         for (int i = 0; i < message.Length; i++)
         {
@@ -432,7 +450,7 @@ public partial class LevelLoader : ContentPage
             }
             else
             {
-                DialogueBox.Text += message[i].ToString();
+                chosenLabel.Text += message[i].ToString();
             }
             await Task.Delay(delay);
         }
