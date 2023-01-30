@@ -1,3 +1,5 @@
+using Microsoft.Maui.Controls;
+
 namespace GameTest.Levels;
 
 public partial class LevelLoader : ContentPage
@@ -47,6 +49,32 @@ public partial class LevelLoader : ContentPage
     private int MovementMode = 0; // 0 is map moves, 1 is player moves 2 is disabled \\
 
     // Cutscenes \\
+
+    private async Task CheckHitBoxes()
+    {
+        foreach(Frame frame in mapContents.Children)
+        {
+            if (frame.X + frame.Width > Player.X &&
+            Player.X + Player.Width > frame.X &&
+            frame.Y + frame.Height > Player.Y &&
+            Player.Y + Player.Height > frame.Y)
+            {
+                if (MovementMode == 1)
+                {
+                    if (Player.X >= frame.X)
+                    {
+                        await DisplayAlert("hitbox", "oh no u hit", "AAAAA");
+                    }
+                }
+                
+                //overlapping.
+            }
+            else
+            {
+                // not overlapping.
+            }
+        }
+    }
     private async Task Cutscene1()
     {
         try
@@ -201,12 +229,14 @@ public partial class LevelLoader : ContentPage
     // Controls \\
     private async void OnThumbstickPanUpdated(object sender, PanUpdatedEventArgs e)
     {
+       
         if (e.StatusType == GestureStatus.Started)
         {
             Console.WriteLine("Started Walking");
         }
         else if (e.StatusType == GestureStatus.Running)
         {
+            _ = CheckHitBoxes();
             double x = e.TotalX, y = e.TotalY;
             await thumbstick.TranslateTo(x, y, 15, Easing.CubicOut);
             walkCycleTimer++;
